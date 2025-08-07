@@ -1,4 +1,5 @@
 "use client";
+import './globals.css'
 import Navbar from "./navbar";
 import StarBackground from "./starbackground";
 import Footer from "./footer";
