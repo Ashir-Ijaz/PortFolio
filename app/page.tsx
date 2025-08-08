@@ -38,6 +38,7 @@ import About from "./components/Allpages/About/page";
 import Projects from "./components/Allpages/Projects/page";
 import Contact from "./components/Allpages/Contact/page";
 
+
 export default function Home() {
   return (
     <>

@@ -3,7 +3,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
