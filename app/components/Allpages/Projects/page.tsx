@@ -337,22 +337,20 @@ export default function Projects() {
   };
 
   // Desktop Slider Logic
-  const maxStartIndex = Math.max(0, projectsData.length - projectsPerPage); // Stop at last full/partial set
+  const maxStartIndex = Math.max(0, projectsData.length - 1); // Last valid startIndex (align last project)
 
   const handleNext = () => {
-    const newIndex = startIndex + projectsPerPage;
-    if (newIndex <= maxStartIndex) {
-      setStartIndex(newIndex);
-      setTranslateX(0); // Reset drag offset
-    }
+    const newIndex = Math.min(startIndex + projectsPerPage, maxStartIndex);
+    console.log("Next clicked", { currentStartIndex: startIndex, newIndex, maxStartIndex });
+    setStartIndex(newIndex);
+    setTranslateX(0); // Reset drag offset
   };
 
   const handlePrevious = () => {
-    const newIndex = startIndex - projectsPerPage;
-    if (newIndex >= 0) {
-      setStartIndex(newIndex);
-      setTranslateX(0); // Reset drag offset
-    }
+    const newIndex = Math.max(startIndex - projectsPerPage, 0);
+    console.log("Previous clicked", { currentStartIndex: startIndex, newIndex, maxStartIndex });
+    setStartIndex(newIndex);
+    setTranslateX(0); // Reset drag offset
   };
 
   // Handle drag start (mouse or touch)
@@ -375,12 +373,13 @@ export default function Projects() {
     const threshold = 100; // Pixels to trigger slide
     const direction = translateX < -threshold ? 1 : translateX > threshold ? -1 : 0;
     const newPage = (startIndex / projectsPerPage) + direction;
-    let newIndex = newPage * projectsPerPage;
-    if (newPage < 0) {
+    let newIndex = Math.round(newPage * projectsPerPage);
+    if (newIndex < 0) {
       newIndex = 0;
     } else if (newIndex > maxStartIndex) {
       newIndex = maxStartIndex;
     }
+    console.log("Drag ended", { newIndex, maxStartIndex });
     setStartIndex(newIndex);
     setTranslateX(0); // Reset drag offset
   };
@@ -395,13 +394,16 @@ export default function Projects() {
   const handleTouchMove = (e: React.TouchEvent) => handleDragMove(e.touches[0].clientX);
   const handleTouchEnd = () => handleDragEnd();
 
-  // Calculate transform for sliding
+  // Calculate transform for sliding, adjusting for partial sets
   const currentPage = startIndex / projectsPerPage;
   const transformOffset = `translateX(calc(-${currentPage * 100}% + ${translateX}px))`;
 
   // Disable buttons when at start or end
   const isPrevDisabled = startIndex === 0;
   const isNextDisabled = startIndex >= maxStartIndex;
+
+  // Debug logging for button states
+  console.log({ startIndex, maxStartIndex, isNextDisabled, isPrevDisabled, projectsLength: projectsData.length });
 
   return (
     <section id="projects" className="py-16">
@@ -423,7 +425,7 @@ export default function Projects() {
             onTouchEnd={handleTouchEnd}
           >
             {projectsData.map((project: Project) => (
-              <div key={project.id} className="flex-shrink-0 w-[calc(100%/3 - 1rem)]">
+              <div key={project.id} className="flex-shrink-0 w-[calc(100%/3 - 1rem)] min-w-[200px]">
                 <ProjectCard project={project} onClick={() => openPopup(project)} />
               </div>
             ))}

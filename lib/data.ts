@@ -41,28 +41,13 @@ export const projectsData: Project[] = [
     technologies: ['Next.js', 'Node.js']
   },
    {
-    id: '5',
+    id: '4',
     title: 'Repair App',
     description: 'Another project showcasing different features.',
     image: '/repairing.jpg',
     github: 'https://github.com/username/project2',
     technologies: ['Next.js', 'Node.js']
   },
-   {
-    id: '6',
-    title: 'Repair App',
-    description: 'Another project showcasing different features.',
-    image: '/repairing.jpg',
-    github: 'https://github.com/username/project2',
-    technologies: ['Next.js', 'Node.js']
-  },
-   {
-    id: '7',
-    title: 'Repair App',
-    description: 'Another project showcasing different features.',
-    image: '/repairing.jpg',
-    github: 'https://github.com/username/project2',
-    technologies: ['Next.js', 'Node.js']
-  },
+  
   // Add more projects as needed
 ];
