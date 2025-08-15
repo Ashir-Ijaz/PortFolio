@@ -189,7 +189,7 @@ export default function Projects() {
                 href={selectedProject.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-6 px-5 py-2 bg-indigo-500 rounded-lg hover:bg-indigo-600 transition"
+                className="inline-block mt-6 px-5 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 transition"
               >
                 View on GitHub
               </a>
