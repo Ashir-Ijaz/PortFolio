@@ -126,7 +126,7 @@ export default function AboutPage() {
     <div className="relative z-10 text-white">
       <Navbar />
 
-      <section className="max-w-4xl mx-auto mt-24 px-4 text-center">
+      <section id="about" className="max-w-4xl mx-auto mt-24 px-4 text-center">
         <h1 className="text-3xl sm:text-4xl font-bold mb-6">About Me</h1>
         <div className="flex justify-center mb-6">
           <Image

@@ -18,20 +18,51 @@ export const projectsData: Project[] = [
   },
   {
     id: '2',
-    title: 'Cool App',
+    title: 'Care App',
     description: 'Another project showcasing different features.',
     image: '/healthcare.jpg',
     github: 'https://github.com/username/project2',
     technologies: ['Next.js', 'Node.js']
   },
-    {
+  {
     id: '3',
-    title: 'Cool App',
+    title: 'Safe Space',
+    description: 'Another project showcasing different features.',
+    image: '/safespace.jpg',
+    github: 'https://github.com/username/project2',
+    technologies: ['Next.js', 'Node.js']
+  },
+    {
+    id: '4',
+    title: 'Repair App',
     description: 'Another project showcasing different features.',
     image: '/repairing.jpg',
     github: 'https://github.com/username/project2',
     technologies: ['Next.js', 'Node.js']
   },
-  
+   {
+    id: '5',
+    title: 'Repair App',
+    description: 'Another project showcasing different features.',
+    image: '/repairing.jpg',
+    github: 'https://github.com/username/project2',
+    technologies: ['Next.js', 'Node.js']
+  },
+   {
+    id: '6',
+    title: 'Repair App',
+    description: 'Another project showcasing different features.',
+    image: '/repairing.jpg',
+    github: 'https://github.com/username/project2',
+    technologies: ['Next.js', 'Node.js']
+  },
+   {
+    id: '7',
+    title: 'Repair App',
+    description: 'Another project showcasing different features.',
+    image: '/repairing.jpg',
+    github: 'https://github.com/username/project2',
+    technologies: ['Next.js', 'Node.js']
+  },
   // Add more projects as needed
 ];

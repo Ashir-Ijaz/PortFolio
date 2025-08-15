@@ -58,7 +58,7 @@ export default function ContactPage() {
       <div className="relative z-10 text-white">
         <Navbar />
 
-        <section className="max-w-2xl mx-auto mt-24 px-4">
+        <section id="contact" className="max-w-2xl mx-auto mt-24 px-4">
           <h1 className="text-3xl sm:text-4xl font-bold mb-4">Contact Me</h1>
           <p className="text-gray-300 mb-6">
             Interested in working together or just want to say hi? Fill out the
