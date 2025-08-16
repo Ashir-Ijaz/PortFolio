@@ -306,7 +306,7 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [startIndex, setStartIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
-  const projectsPerPage = 3; // Number of projects to show per slide on desktop
+  const projectsPerPage = 3;
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -314,19 +314,14 @@ export default function Projects() {
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024); // lg breakpoint for desktop
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
     checkDesktop();
     window.addEventListener("resize", checkDesktop);
     return () => window.removeEventListener("resize", checkDesktop);
   }, []);
 
-  const openPopup = (project: Project) => {
-    setSelectedProject(project);
-  };
-
-  const closePopup = () => {
-    setSelectedProject(null);
-  };
+  const openPopup = (project: Project) => setSelectedProject(project);
+  const closePopup = () => setSelectedProject(null);
 
   const toggleProjects = () => {
     if (visibleCount === 3) {
@@ -337,51 +332,45 @@ export default function Projects() {
   };
 
   // Desktop Slider Logic
-  const maxStartIndex = Math.max(0, projectsData.length - 1); // Last valid startIndex (align last project)
+  const maxStartIndex = Math.max(0, projectsData.length - projectsPerPage);
 
   const handleNext = () => {
     const newIndex = Math.min(startIndex + projectsPerPage, maxStartIndex);
-    console.log("Next clicked", { currentStartIndex: startIndex, newIndex, maxStartIndex });
     setStartIndex(newIndex);
-    setTranslateX(0); // Reset drag offset
+    setTranslateX(0);
   };
 
   const handlePrevious = () => {
     const newIndex = Math.max(startIndex - projectsPerPage, 0);
-    console.log("Previous clicked", { currentStartIndex: startIndex, newIndex, maxStartIndex });
     setStartIndex(newIndex);
-    setTranslateX(0); // Reset drag offset
+    setTranslateX(0);
   };
 
-  // Handle drag start (mouse or touch)
+  // Drag logic
   const handleDragStart = (clientX: number) => {
     setIsDragging(true);
     setStartX(clientX);
   };
 
-  // Handle drag move (mouse or touch)
   const handleDragMove = (clientX: number) => {
     if (!isDragging) return;
-    const deltaX = clientX - startX;
-    setTranslateX(deltaX);
+    setTranslateX(clientX - startX);
   };
 
-  // Handle drag end (mouse or touch)
   const handleDragEnd = () => {
     if (!isDragging) return;
     setIsDragging(false);
-    const threshold = 100; // Pixels to trigger slide
+
+    const threshold = 100;
     const direction = translateX < -threshold ? 1 : translateX > threshold ? -1 : 0;
-    const newPage = (startIndex / projectsPerPage) + direction;
+    const newPage = startIndex / projectsPerPage + direction;
     let newIndex = Math.round(newPage * projectsPerPage);
-    if (newIndex < 0) {
-      newIndex = 0;
-    } else if (newIndex > maxStartIndex) {
-      newIndex = maxStartIndex;
-    }
-    console.log("Drag ended", { newIndex, maxStartIndex });
+
+    if (newIndex < 0) newIndex = 0;
+    else if (newIndex > maxStartIndex) newIndex = maxStartIndex;
+
     setStartIndex(newIndex);
-    setTranslateX(0); // Reset drag offset
+    setTranslateX(0);
   };
 
   // Mouse events
@@ -394,23 +383,19 @@ export default function Projects() {
   const handleTouchMove = (e: React.TouchEvent) => handleDragMove(e.touches[0].clientX);
   const handleTouchEnd = () => handleDragEnd();
 
-  // Calculate transform for sliding, adjusting for partial sets
+  // Transform
   const currentPage = startIndex / projectsPerPage;
   const transformOffset = `translateX(calc(-${currentPage * 100}% + ${translateX}px))`;
 
-  // Disable buttons when at start or end
   const isPrevDisabled = startIndex === 0;
   const isNextDisabled = startIndex >= maxStartIndex;
-
-  // Debug logging for button states
-  console.log({ startIndex, maxStartIndex, isNextDisabled, isPrevDisabled, projectsLength: projectsData.length });
 
   return (
     <section id="projects" className="py-16">
       <SectionTitle title="Projects" />
 
       {isDesktop ? (
-        // Desktop: Horizontal Slider with Previous/Next Buttons and Drag
+        // Desktop: Horizontal Slider
         <div className="relative overflow-hidden">
           <div
             ref={sliderRef}
@@ -431,12 +416,12 @@ export default function Projects() {
             ))}
           </div>
 
-          {/* Slider Controls with Previous/Next Text */}
+          {/* Slider Controls */}
           <div className="flex justify-center gap-4 mt-8">
             <button
               onClick={handlePrevious}
               disabled={isPrevDisabled}
-              className={`px-5 py-2 rounded-lg transition font-semibold ${
+              className={`min-w-[120px] px-5 py-2 rounded-lg transition font-semibold text-center ${
                 isPrevDisabled
                   ? "bg-gray-600 text-gray-400 cursor-not-allowed"
                   : "bg-purple-600 text-white hover:bg-purple-700"
@@ -448,7 +433,7 @@ export default function Projects() {
             <button
               onClick={handleNext}
               disabled={isNextDisabled}
-              className={`px-5 py-2 rounded-lg transition font-semibold ${
+              className={`min-w-[120px] px-5 py-2 rounded-lg transition font-semibold text-center ${
                 isNextDisabled
                   ? "bg-gray-600 text-gray-400 cursor-not-allowed"
                   : "bg-purple-600 text-white hover:bg-purple-700"
@@ -460,7 +445,7 @@ export default function Projects() {
           </div>
         </div>
       ) : (
-        // Mobile/Other: Original View More/View Less Toggle
+        // Mobile: View More/View Less
         <>
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {projectsData.slice(0, visibleCount).map((project: Project) => (
@@ -470,11 +455,10 @@ export default function Projects() {
             ))}
           </div>
 
-          {/* View More / View Less button */}
           <div className="flex justify-center mt-8">
             <button
               onClick={toggleProjects}
-              className="px-5 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold"
+              className="min-w-[120px] px-5 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold text-center"
             >
               {visibleCount === 3 ? "View More" : "View Less"}
             </button>
@@ -482,7 +466,7 @@ export default function Projects() {
         </>
       )}
 
-      {/* Popup for project details */}
+      {/* Popup */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
           <div className="relative w-full max-w-2xl bg-white/5 border border-white/10 rounded-xl shadow-2xl p-6 text-white backdrop-blur-md">
@@ -518,7 +502,7 @@ export default function Projects() {
                 href={selectedProject.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-6 px-5 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 transition font-semibold"
+                className="inline-block mt-6 min-w-[120px] px-5 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 transition font-semibold text-center"
               >
                 View on GitHub
               </a>

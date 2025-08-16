@@ -10,7 +10,7 @@ export type Project = {
 export const projectsData: Project[] = [
   {
     id: '1',
-    title: 'My Awesome Project',
+    title: 'Wallpaper App',
     description: 'This is a brief description of what this project does.',
     image: '/portfolio.jpg',
     github: 'https://github.com/username/project1',
@@ -34,20 +34,20 @@ export const projectsData: Project[] = [
   },
     {
     id: '4',
-    title: 'Repair App',
+    title: 'Showroom App ',
     description: 'Another project showcasing different features.',
-    image: '/repairing.jpg',
+    image: '/showroom.jpg',
     github: 'https://github.com/username/project2',
     technologies: ['Next.js', 'Node.js']
   },
    {
-    id: '4',
+    id: '5',
     title: 'Repair App',
     description: 'Another project showcasing different features.',
     image: '/repairing.jpg',
     github: 'https://github.com/username/project2',
     technologies: ['Next.js', 'Node.js']
   },
-  
+ 
   // Add more projects as needed
 ];
