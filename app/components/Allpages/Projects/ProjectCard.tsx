@@ -36,7 +36,7 @@ type Props = {
 const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
   return (
     <div
-      className="relative bg-white/5 rounded-lg overflow-hidden cursor-pointer group transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+      className="relative bg-white/5 rounded-lg overflow-hidden cursor-pointer group transition-transform duration-300 hover:scale-105 hover:shadow-lg flex flex-col"
       onClick={onClick}
     >
       {/* Project Image */}
@@ -60,9 +60,9 @@ const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
       </div>
 
       {/* Title & Description */}
-      <div className="p-4">
+      <div className="p-4 flex-1 flex flex-col">
         <h3 className="text-xl text-white font-semibold">{project.title}</h3>
-        <p className="text-gray-300 mt-2 line-clamp-2">{project.description}</p>
+        <p className="text-gray-300 mt-2 break-words whitespace-normal">{project.description}</p>
       </div>
     </div>
   );
