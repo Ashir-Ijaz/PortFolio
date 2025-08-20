@@ -295,6 +295,7 @@
 //     </section>
 //   );
 // }
+
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -319,6 +320,16 @@ export default function Projects() {
     window.addEventListener("resize", checkDesktop);
     return () => window.removeEventListener("resize", checkDesktop);
   }, []);
+
+  // Close on Esc when modal is open
+  useEffect(() => {
+    if (!selectedProject) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedProject(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedProject]);
 
   const openPopup = (project: Project) => setSelectedProject(project);
   const closePopup = () => setSelectedProject(null);
@@ -468,11 +479,25 @@ export default function Projects() {
 
       {/* Popup */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-          <div className="relative w-full max-w-2xl bg-white/5 border border-white/10 rounded-xl shadow-2xl p-6 text-white backdrop-blur-md">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+          onClick={closePopup} // click outside to close
+        >
+          <div
+            className="relative w-full max-w-2xl bg-white/5 border border-white/10 rounded-xl shadow-2xl p-6 text-white backdrop-blur-md"
+            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-title"
+          >
+            {/* Prominent Close Button */}
             <button
-              className="absolute top-3 right-4 text-2xl text-white hover:text-red-400"
+              className="absolute -top-0 -right-0 w-7 h-7 rounded-full bg-black text-white
+                         hover:bg-white/90 hover:text-black shadow-xl ring-1 ring-black/10 flex items-center justify-center
+                         text-3xl font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
               onClick={closePopup}
+              aria-label="Close details"
+              title="Close"
             >
               &times;
             </button>
@@ -483,7 +508,9 @@ export default function Projects() {
               className="w-full h-64 object-cover rounded-lg mb-5 border border-white/10"
             />
 
-            <h2 className="text-3xl font-semibold mb-3">{selectedProject.title}</h2>
+            <h2 id="project-title" className="text-3xl font-semibold mb-3">
+              {selectedProject.title}
+            </h2>
             <p className="text-gray-300 mb-5">{selectedProject.description}</p>
 
             <div className="flex flex-wrap gap-3">

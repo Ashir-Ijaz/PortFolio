@@ -171,7 +171,8 @@ export default function About() {
   return (
     <section id="about" className="min-h-screen flex flex-col items-center justify-center text-white px-6">
       {/* Heading */}
-      <h2 className="text-4xl font-bold mb-8 text-center">About Me</h2>
+      <h2 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 via-blue-400 to-white bg-clip-text text-transparent 
+                         leading-tigh">About Me</h2>
 
       {/* Image */}
       <div className="w-40 h-40 border-4 border-purple-600 rounded-full overflow-hidden mb-6">
@@ -188,11 +189,13 @@ export default function About() {
         A passionate developer who loves crafting unique and smooth web
         experiences. My focus is on building clean, modern, and user-friendly
         designs with the power of frontend and backend technologies.
-      </p>
+      </p><br></br>
 
       {/* Skills Section */}
       <div className="mt-12 w-full max-w-3xl">
-        <h3 className="text-3xl font-semibold text-center mb-6">Skills</h3>
+        <h3 className="text-4xl font-bold mb-8 text-center 
+             bg-gradient-to-r from-purple-500 via-pink-200 to-blue-300
+             bg-clip-text text-transparent leading-tight w-fit mx-auto">Skills</h3>
         <SkillsSlider />
       </div>
     </section>
