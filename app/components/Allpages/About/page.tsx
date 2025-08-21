@@ -184,7 +184,7 @@ export default function About() {
       </div>
 
       {/* Text */}
-      <p className="text-center max-w-2xl text-lg leading-relaxed">
+      <p className="text-center max-w-2xl text-gray-300 text-lg leading-relaxed">
         Hi, I'm <span className="text-purple-400 font-semibold">Ashir Ijaz</span>.  
         A passionate developer who loves crafting unique and smooth web
         experiences. My focus is on building clean, modern, and user-friendly

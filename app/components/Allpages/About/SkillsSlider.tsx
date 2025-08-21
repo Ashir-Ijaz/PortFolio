@@ -80,7 +80,7 @@ export default function SkillsSlider() {
   };
 
   return (
-    <div className="w-full py-6">
+    <div className="w-full py-6 text-gray-300">
       <Slider {...settings}>
         {skills.map((skill, index) => (
           <div key={index} className="flex justify-center">

@@ -48,21 +48,20 @@ export default function Home() {
 
         {/* Hero Section */}
         <section
-          id="home"
-          className="flex flex-col md:flex-row items-center justify-center min-h-[80vh] 
-                     px-6 md:px-16 lg:px-24 text-center md:text-left gap-12"
+             id="home"
+             className="flex flex-row items-center justify-center 
+             min-h-[60vh] sm:min-h-[80vh] px-6 md:px-16 lg:px-24 gap-10 md:gap-16"
         >
-          {/* Left: Text */}
-          <div className="flex-1 flex flex-col items-center md:items-start md:ml-12">
-            {/* 👆 added md:ml-12 to push text slightly to the right on medium+ screens */}
+          {/* Left: Text (always left-aligned) */}
+          <div className="flex-1 flex flex-col items-start mt-0 sm:mt-1 lg:pl-20 text-left">
             <h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 
                          bg-gradient-to-r from-purple-400 via-blue-400 to-white bg-clip-text text-transparent 
                          leading-tight"
             >
               Ashir Ijaz
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-lg mb-8 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-md mb-8 leading-relaxed">
               I craft modern web experiences with clean code & engaging UI
             </p>
             <a
@@ -89,3 +88,4 @@ export default function Home() {
     </>
   );
 }
+
