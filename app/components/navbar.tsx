@@ -147,25 +147,25 @@ const Navbar = () => {
     { label: "Home", href: "#home" },
     { label: "Projects", href: "#projects" },
     { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "/contact" },
   ];
 
   // Smooth scroll with fixed-navbar offset + preserve hash in URL
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (!el) return;
+ const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+  const id = href.replace("#", "");
+  const el = document.getElementById(id);
+  if (!el) return;
 
-    const rect = el.getBoundingClientRect();
-    const y = rect.top + window.pageYOffset - NAV_HEIGHT; // offset for fixed navbar
-    window.scrollTo({ top: y, behavior: "smooth" });
+  const rect = el.getBoundingClientRect();
+  const y = rect.top + window.pageYOffset - NAV_HEIGHT; // offset for fixed navbar
+  window.scrollTo({ top: y, behavior: "smooth" });
 
-    // Update URL hash without jump
-    history.replaceState(null, "", href);
+  // Update URL hash without jump
+  history.replaceState(null, "", href);
 
-    setMenuOpen(false);
-  };
+  setMenuOpen(false);
+};
 
   return (
     <nav
